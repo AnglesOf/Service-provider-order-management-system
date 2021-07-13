@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+	<meta name="renderer" content="webkit">
+	<!--国产浏览器高速模式-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="李幸阜" />
+	<!-- 作者 -->
+	<meta name="revised" content="李幸阜" />
+	<!-- 定义页面的最新版本 -->
+	<meta name="description" content="管理系统" />
+	<!-- 网站简介 -->
+	<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+	<title>管理系统</title>
+
+	<!-- 公共样式 开始 -->
+	<link rel="stylesheet" type="text/css" href="static/css/base.css">
+	<link rel="stylesheet" type="text/css" href="static/css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="static/layui/css/layui.css">
+	<script type="text/javascript" src="/RR/static/framework/jquery-1.11.3.min.js" ></script>
+	<!--[if lt IE 9]>
+	<script src="/RR/static/framework/html5shiv.min.js"></script>
+	<script src="/RR/static/framework/respond.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="/RR/static/layui/layui.js"></script>
+	<!-- 滚动条插件 -->
+	<link rel="stylesheet" type="text/css" href="/RR/static/css/jquery.mCustomScrollbar.css">
+	<script src="/RR/static/framework/jquery-ui-1.10.4.min.js"></script>
+	<script src="/RR/static/framework/jquery.mousewheel.min.js"></script>
+	<script src="/RR/static/framework/jquery.mCustomScrollbar.min.js"></script>
+	<script src="/RR/static/framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+	<!-- 公共样式 结束 -->
+
+	<link rel="stylesheet" type="text/css" href="/RR/static/css/frameStyle.css">
+	<script type="text/javascript" src="/RR/static/framework/frame.js" ></script>
+
+</head>
+
+<body>
+<!-- 左侧菜单 - 开始 -->
+<div class="frameMenu">
+	<div class="logo">
+		<img src="/RR/static/images/logo.png"/>
+		<div class="logoText">
+			<h1>李幸阜开发</h1>
+			<p>develop by Li Xingfu</p>
+		</div>
+	</div>
+
+	<div class="menu">
+		<ul>
+			<li>
+				<a class="menuFA" href="javascript:void(0)" onclick="menuCAClick('/RR/static/user/reportForm1.html?time=javascript:new Date().getTime()',this)">
+					<i class="iconfont icon-wodeyewuyuan left"></i>首页
+				</a>
+			</li>
+			<li>
+				<a class="menuFA" href="javascript:void(0)" onclick="menuCAClick('/RR/total',this)">
+					<i class="iconfont icon-wodeyewuyuan left"></i>统计
+				</a>
+			</li>
+			<li>
+				<a class="menuFA" href="javascript:void(0)">
+					<i class="iconfont icon-wodeyewuyuan left"></i>
+					服务商管理
+					<i class="iconfont icon-dajiantouyou right"></i>
+				</a>
+				<dl>
+					<dt>
+						<a href="javascript:void(0)" onclick="menuCAClick('/RR/servers/findServers',this)">
+							查看服务商信息
+						</a>
+					</dt>
+					<dt>
+						<a href="javascript:void(0)" onclick="menuCAClick('/RR/static/user/addServers.html',this)">
+							添加服务商信息
+						</a>
+					</dt>
+				</dl>
+			</li>
+			<li>
+				<a class="menuFA" href="javascript:void(0)">
+					<i class="iconfont icon-ercifenjian left"></i>
+					订单管理
+					<i class="iconfont icon-dajiantouyou right"></i>
+				</a>
+				<dl>
+					<dt>
+						<a href="javascript:void(0)" onclick="menuCAClick('/RR/orders/findOrders',this)">
+							查看订单信息
+						</a>
+					</dt>
+					<dt>
+						<a href="javascript:void(0)" onclick="menuCAClick('/RR/static/user/addOrders.html',this)">
+							添加订单信息
+						</a>
+					</dt>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- 左侧菜单 - 结束 -->
+
+<div class="main">
+	<!-- 核心区域 - 开始 -->
+	<div class="frameMain">
+		<div class="title" id="frameMainTitle">
+			<span><i class="iconfont icon-xianshiqi"></i>后台首页</span>
+		</div>
+		<div class="con">
+			<iframe id="mainIframe" src="/RR/static/user/reportForm1.html" scrolling="no"></iframe>
+		</div>
+	</div>
+	<!-- 核心区域 - 结束 -->
+</div>
+</body>
+
+</html>
