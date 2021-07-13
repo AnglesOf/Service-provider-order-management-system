@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="李幸阜" />
+		<!-- 作者 -->
+		<meta name="revised" content="李幸阜" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="网站首页" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<title>李幸阜开发</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="stylesheet" type="text/css" href="/RR/static/css/base.css">
+		<link rel="stylesheet" type="text/css" href="/RR/static/css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="/RR/static/layui/css/layui.css">
+		<script type="text/javascript" src="/RR/static/framework/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="/RR/static/layui/layui.js"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="/RR/static/css/jquery.mCustomScrollbar.css">
+		<script src="/RR/static/framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="/RR/static/framework/jquery.mousewheel.min.js"></script>
+		<script src="/RR/static/framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="/RR/static/framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+		
+		<link rel="stylesheet" type="text/css" href="/RR/static/css/reportForm.css">
+
+	</head>
+
+	<body>
+		<div class="cBody">
+			<div class="console">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<div class="reportForm">
+							<a class="typeBut bl active">本周</a>
+							<a class="typeBut">上周</a>
+							<a class="typeBut">本月</a>
+							<a class="typeBut br">上月</a>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<div class="reportForm_main">
+				<div class="collectData">
+				    <div class="layui-row">
+						<div class="layui-col-md3 br">
+							<div class="layui-col-md6">
+								<div class="title">访问人数</div>
+								<div class="nums"><font id="visitCount">1</font><span>人</span></div>
+							</div>
+						</div>
+						<div class="layui-col-md3 br">
+							<div class="layui-col-md6">
+								<div class="title">服务商总量</div>
+								<div class="nums"><font id="serversCount">4</font></div>
+							</div>
+							<div class="layui-col-md6">
+								<div class="title">订单总量</div>
+								<div class="nums"><font id="ordersCount">3</font></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				
+				<div class="reportType_tj">
+					<form class="layui-form" action="">
+		                <div class="layui-input-inline">
+		                    <select name="reportType" id="reportType" lay-filter="reportType">
+		                        <option value="访问人数">访问人数</option>
+		                        <option value="服务商总量">服务商总量</option>
+		                        <option value="订单总量">订单总量</option>
+		                    </select>
+		                </div>
+		                <div class="layui-input-inline">
+							<a class="pressBut active" onclick="refreshData([82, 2, 91, 34, 10, 120, 20],this)">按天</a>
+							<a class="pressBut" onclick="refreshData([10, 21, 1, 134, 210, 520, 420],this)">按周</a>
+							<a class="pressBut" onclick="refreshData([82, 2, 91, 34, 10, 120, 20],this)">按月</a>
+		                </div>
+		                <div class="changeRate">
+							<div class="layui-col-md6 left">100</div>
+							<div class="layui-col-md6 right">
+								<!--上升-->
+								<!--<span class="data up">-99.42%<i class="iconfont icon-xiangshangjiantoucuxiao"></i></span>-->
+								<!--下降-->
+								<span class="data">-99.42%<i class="iconfont icon-xiangxiajiantoucuxiao"></i></span>
+								<span class="text">相比上季度</span>
+							</div>
+		                </div>
+		                <div id="myReport" style="width: 100%; height: 400px;"></div>
+		                <script src="../framework/echarts.min.js"></script>
+		                <script type="text/javascript">
+					        // 基于准备好的dom，初始化echarts实例
+					        var myChart = echarts.init(document.getElementById('myReport'));
+					
+					        // 指定图表的配置项和数据
+					        var option = {
+							    xAxis: {
+							        type: 'category',
+							        boundaryGap: false,
+							        data: ['2018-03-01', '2018-03-02', '2018-03-03', '2018-03-04', '2018-03-05', '2018-03-06', '2018-03-07']
+							    },
+							    yAxis: {
+							        type: 'value'
+							    },
+							    grid:{
+							    	top: 20,
+							    	bottom: 20,
+							    	left: 50,
+							    	right: 50
+							    },
+							    series: [{
+							        data: [820, 932, 901, 934, 1290, 1330, 1320],
+							        type: 'line',
+							        areaStyle: {}
+							    }]
+							};
+					        myChart.setOption(option);
+
+					        function refreshData(data,_this) {
+					        	$(_this).addClass("active");
+					        	$(_this).siblings().removeClass("active");
+					        	if(!myChart) {
+					        		return;
+					        	}
+
+					        	//更新数据
+					        	var option = myChart.getOption();
+					        	option.series[0].data = data;
+					        	myChart.setOption(option);
+					        }
+		                </script>
+					</form>
+	
+				</div>
+			</div>
+			<!-- layUI 分页模块 -->
+		</div>
+	</body>
+<script>
+	var cache = null;
+	$.ajax({
+		type: "get",
+		url: "/RR/ajax/getCache",
+		success: function(data){
+			cache = data;
+			document.getElementById("visitCount").innerText=data.visitCount;
+			document.getElementById("serversCount").innerText=data.serversCount;
+			document.getElementById("ordersCount").innerText=data.ordersCount;
+		}
+	});
+</script>
+
+</html>
