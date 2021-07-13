@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.dao.TotalDao">
+    <select id="selectTotal" resultType="Totals">
+		select
+		tg.fid as s_id,
+		tg.fn as user_name,
+		count( tg.kid ) as serversCount,
+		sum( tg.onum ) as ordersCount
+		from
+			(
+			select
+				te.fn as fn,
+				te.fid as fid,
+				te.kid as kid,
+				ifnull( count( distinct orders.o_id ), 0 ) as onum
+				from (
+				select
+					a.user_name as fn,
+					a.s_id as fid,
+					b.s_id as kid
+					from servers as a
+					inner join servers as b
+					on a.s_id = b.p_id
+				) as te
+				left join orders on te.kid = orders.s_id group by orders.s_id,
+				te.fn,
+				te.fid,
+				te.kid
+			) as tg group by tg.fid;
+    </select>
+</mapper>
